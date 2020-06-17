@@ -2,10 +2,11 @@ from flask import Flask, jsonify, request
 from neuralNetworkBackEnd import NeuralNetwork
 import neuralTester
 import numpy as np
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-
+CORS(app)
 
 #ruta
 @app.route('/prediction', methods=['POST'])
