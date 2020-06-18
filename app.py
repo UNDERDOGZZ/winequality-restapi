@@ -3,7 +3,7 @@ from neuralNetworkBackEnd import NeuralNetwork
 import neuralTester
 import numpy as np
 from flask_cors import CORS
-
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -26,6 +26,11 @@ def prediction():
     nn.train()
     quality = float(nn.predict(fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide, totalSulfurDioxide, density, pH, sulphates, alcohol))
     return jsonify({"quality":quality})
+
+@app.route('/dataset', methods=['GET'])
+def dataset():
+    csv = pd.read_csv('dataSet.csv', sep=";")
+    return jsonify({"csv":csv})
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
