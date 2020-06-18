@@ -1,12 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from neuralNetworkBackEnd import NeuralNetwork
 import neuralTester
 import numpy as np
+import csv
+import json
 from flask_cors import CORS
 import pandas as pd
-
+from io import StringIO
 app = Flask(__name__)
 CORS(app)
+
+
 
 #ruta
 @app.route('/prediction', methods=['POST'])
@@ -29,8 +33,8 @@ def prediction():
 
 @app.route('/dataset')
 def dataset():
-    csv = pd.read_csv('dataSet.csv', sep=";")
-    return jsonify({"csv":csv})
+    csv = (pd.read_csv('dataSet.csv', sep=";"))
+    return jsonify({"csv":csv.to_json()})
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
