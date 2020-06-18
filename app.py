@@ -27,7 +27,7 @@ def prediction():
     quality = float(nn.predict(fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide, totalSulfurDioxide, density, pH, sulphates, alcohol))
     return jsonify({"quality":quality})
 
-@app.route('/dataset', methods=['GET'])
+@app.route('/dataset')
 def dataset():
     csv = pd.read_csv('dataSet.csv', sep=";")
     return jsonify({"csv":csv})
